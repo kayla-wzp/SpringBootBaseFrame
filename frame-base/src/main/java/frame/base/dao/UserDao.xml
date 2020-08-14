@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="frame.base.dao.UserDao">
+    <resultMap id="BaseResultMap" type="frame.base.vo.account.User">
+        <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="LOGIN_PASSWORD" property="loginPassword" jdbcType="VARCHAR"/>
+        <result column="SOCIAL_CREDIT_CODE" property="socialCreditCode" jdbcType="VARCHAR"/>
+        <result column="LOGIN_LAST_TIME" property="loginLastTime" jdbcType="TIMESTAMP"/>
+        <result column="LOGIN_PASSWORD_ERROR_LAST_TIME" property="loginPasswordErrorLastTime" jdbcType="TIMESTAMP"/>
+        <result column="LOGIN_PASSWORD_ERROR_TIMES" property="loginPasswordErrorTimes" jdbcType="DECIMAL"/>
+        <result column="LOGIN_PASSWORD_UPDATE_TIME" property="loginPasswordUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="ENTERPRISE_TYPE" property="enterpriseType" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="LOGIN_NO" property="loginNo" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        USER_ID, MOBILE, LOGIN_PASSWORD, SOCIAL_CREDIT_CODE, LOGIN_LAST_TIME, LOGIN_PASSWORD_ERROR_LAST_TIME,
+        LOGIN_PASSWORD_ERROR_TIMES, LOGIN_PASSWORD_UPDATE_TIME, ENTERPRISE_TYPE, STATUS, CREATE_TIME,
+        LAST_UPDATE_TIME, LOGIN_NO,LAST_LOGIN_TIME,EMAIL
+    </sql>
+    <select id="getUserBySocialCreditCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from AC_USER
+        where SOCIAL_CREDIT_CODE= #{socialCreditCode,jdbcType=VARCHAR}
+    </select>
+</mapper>

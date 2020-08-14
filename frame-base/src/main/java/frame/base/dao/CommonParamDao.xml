@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="frame.base.dao.CommonParamDao">
+    <select id="selectParamByParamId" parameterType="string" resultType="string">
+        SELECT
+        t.VALUE as value
+        FROM CO_PARAMETER t
+        WHERE t.PARAMETER_ID =#{paramId}
+    </select>
+    <select id="selectAllParam" resultType="frame.base.vo.common.CommonParam">
+        SELECT
+        t.VALUE as value,
+        t.PARAMETER_ID as paramId
+        FROM CO_PARAMETER t
+        where 1=1
+    </select>
+</mapper>
