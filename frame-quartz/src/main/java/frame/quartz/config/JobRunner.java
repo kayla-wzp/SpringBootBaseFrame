@@ -10,7 +10,7 @@ import frame.quartz.repository.QuartzJobRepository;
 import java.util.List;
 
 /*
- * �˴���Ҫ���@Configuration ��Ҫ��QuartzJob�޸Ķ�Ӧ�Ķ�ʱ��������Լ��ֶ���
+ * 需要加注解@Configuration 并且在QuartzJob修改表名以及表字段
  */
 @Slf4j
 public class JobRunner implements ApplicationRunner {
@@ -24,17 +24,12 @@ public class JobRunner implements ApplicationRunner {
 		this.quartzManage = quartzManage;
 	}
 
-	/**
-	 * ��Ŀ����ʱ���¼������õĶ�ʱ����
-	 * 
-	 * @param args /
-	 */
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		log.info("--------------------ע�붨ʱ����---------------------");
+		log.info("--------------------定时任务注入开始---------------------");
 		List<QuartzJob> quartzJobs = quartzJobRepository.findByIsPauseIsFalse();
 		quartzJobs.forEach(quartzManage::addJob);
-		log.info("--------------------��ʱ����ע�����---------------------");
+		log.info("--------------------定时任务注入结束---------------------");
 
 	}
 }
