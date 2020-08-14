@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwagerConfiguration {
 	@Bean
 	public Docket haloDefaultApi() {
-		return buildApiDocket("frame", "frame.base.config.controller");
+		return buildApiDocket("org.wzp", "frame.base.controller");
 	}
 
 	private Docket buildApiDocket(@NonNull String groupName, @NonNull String basePackage) {
