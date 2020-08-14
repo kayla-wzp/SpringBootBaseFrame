@@ -29,4 +29,14 @@ public class UserService {
 		System.out.println(oowwoo);
 		return userList;
 	}
+
+	public User getUserByLoginNo(String socialCreditCode, String loginNo) {
+		return userDao.getUserBySocialCreditCodeAndLoginNo(socialCreditCode,loginNo);
+
+	}
+
+	public List<User> getAllUserBySocialCreditCode(String socialCreditCode) {
+		return userDao.getUserBySocialCreditCode(socialCreditCode);
+
+	}
 }
