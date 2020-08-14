@@ -1,4 +1,4 @@
-package frame.quartz.service.dto;
+package frame.quartz.dto;
 
 import lombok.Data;
 import frame.quartz.annotation.Query;

@@ -3,7 +3,7 @@ package frame.quartz.service;
 import frame.quartz.domain.QuartzJob;
 import frame.quartz.domain.QuartzLog;
 import org.springframework.data.domain.Pageable;
-import frame.quartz.service.dto.JobQueryCriteria;
+import frame.quartz.dto.JobQueryCriteria;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

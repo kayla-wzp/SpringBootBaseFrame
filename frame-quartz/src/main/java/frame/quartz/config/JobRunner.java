@@ -6,12 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import frame.quartz.repository.QuartzJobRepository;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
 /*
  * 需要加注解@Configuration 并且在QuartzJob修改表名以及表字段
  */
+@Configuration
 @Slf4j
 public class JobRunner implements ApplicationRunner {
 
@@ -26,10 +28,9 @@ public class JobRunner implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		log.info("--------------------定时任务注入开始---------------------");
+		log.info("--------------------注入定时任务---------------------");
 		List<QuartzJob> quartzJobs = quartzJobRepository.findByIsPauseIsFalse();
 		quartzJobs.forEach(quartzManage::addJob);
-		log.info("--------------------定时任务注入结束---------------------");
-
+		log.info("--------------------定时任务注入完成---------------------");
 	}
 }

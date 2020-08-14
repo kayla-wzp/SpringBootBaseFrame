@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import frame.quartz.exception.BadRequestException;
 import frame.quartz.repository.QuartzJobRepository;
 import frame.quartz.repository.QuartzLogRepository;
-import frame.quartz.service.dto.JobQueryCriteria;
+import frame.quartz.dto.JobQueryCriteria;
 import frame.quartz.utils.PageUtil;
 import frame.quartz.utils.QuartzManage;
 import frame.quartz.utils.QueryHelp;
