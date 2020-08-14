@@ -1,0 +1,12 @@
+### IDEA ###
+.idea/
+*/.idea/*
+*.iml
+*/target/*
+*/*.iml
+*/*.ipr
+*/*.iws
+
+### VS Code ###
+*/.vscode/
+*/.mvn/
