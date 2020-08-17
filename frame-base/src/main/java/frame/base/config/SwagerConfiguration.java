@@ -26,7 +26,13 @@ public class SwagerConfiguration {
 		Assert.hasText(basePackage, "Base package must not be blank");
 
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).groupName(groupName).select()
-				.apis(RequestHandlerSelectors.basePackage(basePackage)).paths(PathSelectors.any()).build()
+				//为当前包下controller生成API文档
+				.apis(RequestHandlerSelectors.basePackage(basePackage))
+				//为有@Api注解的Controller生成API文档
+				//.apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+				//为有@ApiOperation注解的方法生成API文档
+				//.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+				.paths(PathSelectors.any()).build()
 				.useDefaultResponseMessages(false).pathMapping("/");
 	}
 
