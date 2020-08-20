@@ -24,9 +24,19 @@ public class UserController {
 	@Resource
 	private UserService userService;
 
+	@ApiOperation(value = "注册用户")
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public CommonResult<User> register(@RequestBody User user) {
+		User newUser = userService.register(user);
+		if (newUser == null) {
+			CommonResult.failed();
+		}
+		return CommonResult.success(newUser);
+	}
+
 	@RequestMapping(value = "/getUserByLoginNo", method = RequestMethod.GET)
 	@ApiOperation(value = "获取所有用户")
-	public User getAllUser(@RequestParam("socialCreditCode") String socialCreditCode,
+	public List<User> getAllUser(@RequestParam("socialCreditCode") String socialCreditCode,
 			@RequestParam("loginNo") String loginNo) {
 		log.info(socialCreditCode);
 		return userService.getUserByLoginNo(loginNo);

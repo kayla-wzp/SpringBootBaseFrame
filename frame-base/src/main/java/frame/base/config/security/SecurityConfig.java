@@ -107,7 +107,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public UserDetailsService userDetailsService() {
 		// 获取登录用户信息
 		return username -> {
-			User user = userService.getUserByLoginNo(username);
+			User user = userService.getUserByLoginNo(username).get(0);
 			if (user != null) {
 				// 查询当前用户拥有的权限,返回包含权限的用户
 				List<Permission> permissionList = null;

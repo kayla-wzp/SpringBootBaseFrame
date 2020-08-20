@@ -10,5 +10,7 @@ import java.util.List;
 public interface UserDao {
 	List<User> getUserBySocialCreditCode(@Param("socialCreditCode") String socialCreditCode);
 
-	User getUserByLoginNo(@Param("loginNo") String loginNo);
+	List<User> getUserByLoginNo(@Param("loginNo") String loginNo);
+
+	int insert(User record);
 }

@@ -35,4 +35,18 @@
         from AC_USER
         where LOGIN_NO= #{loginNo,jdbcType=VARCHAR}
     </select>
+    <insert id="insert" parameterType="frame.base.vo.account.User">
+        insert into AC_USER
+        (USER_ID, MOBILE, LOGIN_PASSWORD, SOCIAL_CREDIT_CODE, LOGIN_LAST_TIME, LOGIN_PASSWORD_ERROR_LAST_TIME,
+        LOGIN_PASSWORD_ERROR_TIMES, LOGIN_PASSWORD_UPDATE_TIME, ENTERPRISE_TYPE, STATUS, CREATE_TIME,
+        LAST_UPDATE_TIME, LOGIN_NO, LAST_LOGIN_TIME, EMAIL)
+        values
+        (#{userId,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR},#{loginPassword,jdbcType=VARCHAR},
+        #{socialCreditCode,jdbcType=VARCHAR},#{loginLastTime,jdbcType=TIMESTAMP},
+        #{loginPasswordErrorLastTime,jdbcType=TIMESTAMP},
+        #{loginPasswordErrorTimes,jdbcType=DECIMAL},#{loginPasswordUpdateTime,jdbcType=TIMESTAMP},#{enterpriseType,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},
+        #{lastUpdateTime,jdbcType=VARCHAR},#{loginNo,jdbcType=VARCHAR},
+        #{lastLoginTime,jdbcType=TIMESTAMP},#{email,jdbcType=VARCHAR})
+    </insert>
 </mapper>
