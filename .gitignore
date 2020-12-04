@@ -9,6 +9,6 @@
 
 ### VS Code ###
 */.vscode/
-*/.mvn/
+.mvn/
 mvnw
 mvnw.cmd
