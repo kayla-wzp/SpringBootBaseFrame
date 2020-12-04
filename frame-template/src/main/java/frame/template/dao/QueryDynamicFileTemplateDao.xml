@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cffs.manage.query.dao.dynamictemplate.QueryDynamicFileTemplateDao">
+
+    <select id="QueryDynamicFileTemplateList"
+            resultType="cffs.manage.query.vo.dynamictemplate.QueryDynamicFileTemplateRes">
+        select
+        DFT.FILE_TEMPLATE_ID as fileTemplateId,
+        DFT.FILE_ID as fileId,
+        DFT.FILE_TEMPLATE_NAME as fileTemplateName,
+        DFT.FILE_TYPE as fileType,
+        FT.FILE_TYPE_NAME as fileTypeName,
+        DFT.BUSINESS_TYPE as businessType,
+        BS.BUSINESS_SCENE_NAME as businessTypeName,
+        DFT.LAST_UPDATE_TIME as lastUpdateTime,
+        UF.FILE_ORIGINAL_NAME as fileOriginalName,
+        UF.FILE_EXTENSION as fileExtension,
+        UF.FILE_PATH as filePath
+        from
+        DT_DYNAMIC_FILE_TEMPLATE DFT
+        left join
+        RS_FILE_TYPE FT
+        on DFT.FILE_TYPE = FT.FILE_TYPE
+        left join
+        RU_BUSINESS_SCENE BS
+        on DFT.BUSINESS_TYPE= BS.BUSINESS_SCENE_ID
+        left join
+        RS_UPLOAD_FILE UF
+        on DFT.FILE_ID = UF.FILE_ID
+        where 1=1
+        <if test="fileTemplateName!=null and fileTemplateName!=''">
+            AND DFT.FILE_TEMPLATE_NAME LIKE '%'||#{fileTemplateName,jdbcType=VARCHAR}||'%'
+        </if>
+
+        <if test="fileType !=null and fileType !=''">
+            AND DFT.FILE_TYPE=#{fileType,jdbcType=VARCHAR}
+        </if>
+        order by DFT.LAST_UPDATE_TIME desc
+    </select>
+</mapper>
+

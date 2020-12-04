@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cffs.dao.dynamictemplate.DynamicFileTemplateDao" >
+  <resultMap id="BaseResultMap" type="cffs.po.dynamictemplate.DynamicFileTemplate" >
+    <id column="FILE_TEMPLATE_ID" property="fileTemplateId" jdbcType="VARCHAR" />
+    <result column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+    <result column="FILE_TYPE" property="fileType" jdbcType="VARCHAR" />
+    <result column="FILE_EXTENSION" property="fileExtension" jdbcType="VARCHAR" />
+    <result column="BUSINESS_TYPE" property="businessType" jdbcType="VARCHAR" />
+    <result column="BUSINESS_PHASE" property="businessPhase" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="FILE_TEMPLATE_NAME" property="fileTemplateName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FILE_TEMPLATE_ID, FILE_ID, FILE_TYPE, FILE_EXTENSION, BUSINESS_TYPE, BUSINESS_PHASE,
+    CREATE_TIME, LAST_UPDATE_TIME, FILE_TEMPLATE_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from DT_DYNAMIC_FILE_TEMPLATE
+    where FILE_TEMPLATE_ID = #{fileTemplateId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DT_DYNAMIC_FILE_TEMPLATE
+    where FILE_TEMPLATE_ID = #{fileTemplateId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cffs.po.dynamictemplate.DynamicFileTemplate" >
+    insert into DT_DYNAMIC_FILE_TEMPLATE (FILE_TEMPLATE_ID, FILE_ID, FILE_TYPE,
+      FILE_EXTENSION, BUSINESS_TYPE, BUSINESS_PHASE,
+      CREATE_TIME, LAST_UPDATE_TIME, FILE_TEMPLATE_NAME
+      )
+    values (#{fileTemplateId,jdbcType=VARCHAR}, #{fileId,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR},
+      #{fileExtension,jdbcType=VARCHAR}, #{businessType,jdbcType=VARCHAR}, #{businessPhase,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{fileTemplateName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cffs.po.dynamictemplate.DynamicFileTemplate" >
+    insert into DT_DYNAMIC_FILE_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileTemplateId != null" >
+        FILE_TEMPLATE_ID,
+      </if>
+      <if test="fileId != null" >
+        FILE_ID,
+      </if>
+      <if test="fileType != null" >
+        FILE_TYPE,
+      </if>
+      <if test="fileExtension != null" >
+        FILE_EXTENSION,
+      </if>
+      <if test="businessType != null" >
+        BUSINESS_TYPE,
+      </if>
+      <if test="businessPhase != null" >
+        BUSINESS_PHASE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME,
+      </if>
+      <if test="fileTemplateName != null" >
+        FILE_TEMPLATE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileTemplateId != null" >
+        #{fileTemplateId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileExtension != null" >
+        #{fileExtension,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null" >
+        #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPhase != null" >
+        #{businessPhase,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileTemplateName != null" >
+        #{fileTemplateName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cffs.po.dynamictemplate.DynamicFileTemplate" >
+    update DT_DYNAMIC_FILE_TEMPLATE
+    <set >
+      <if test="fileId != null" >
+        FILE_ID = #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileExtension != null" >
+        FILE_EXTENSION = #{fileExtension,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null" >
+        BUSINESS_TYPE = #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPhase != null" >
+        BUSINESS_PHASE = #{businessPhase,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileTemplateName != null" >
+        FILE_TEMPLATE_NAME = #{fileTemplateName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FILE_TEMPLATE_ID = #{fileTemplateId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cffs.po.dynamictemplate.DynamicFileTemplate" >
+    update DT_DYNAMIC_FILE_TEMPLATE
+    set FILE_ID = #{fileId,jdbcType=VARCHAR},
+      FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+      FILE_EXTENSION = #{fileExtension,jdbcType=VARCHAR},
+      BUSINESS_TYPE = #{businessType,jdbcType=VARCHAR},
+      BUSINESS_PHASE = #{businessPhase,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      FILE_TEMPLATE_NAME = #{fileTemplateName,jdbcType=VARCHAR}
+    where FILE_TEMPLATE_ID = #{fileTemplateId,jdbcType=VARCHAR}
+  </update>
+</mapper>

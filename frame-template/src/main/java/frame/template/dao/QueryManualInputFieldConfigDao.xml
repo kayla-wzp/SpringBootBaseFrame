@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cffs.manage.query.dao.dynamictemplate.QueryManualInputFieldConfigDao">
+
+
+	<select id="queryManualInputFieldConfigList"
+			resultType="cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldConfigListRes"
+			parameterType="cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldConfigListReq">
+		select MANUAL_INPUT_FIELD_CONFIG_ID   as manualInputFieldConfigId,
+		       FIELD_NAME                     as fieldName,
+		       FIELD_VARIABLE_NAME            as fieldVariableName,
+		       TEMPLATE_ID                    as fileTemplateId,
+		       FIELD_TYPE                     as fieldType,
+			   F_DICT('MANUAL_INPUT_FIELD_TYPE', FIELD_TYPE) as fieldTypeText,
+		       QUERY_SQL                      as querySql,
+		       DEFAULT_VALUE                  as defaultValue,
+		       RELATED_FIELD_ID               as relatedFieldId,
+		       CHECK_REGEX                    as checkRegex,
+		       IS_REQUIRED                    as isRequired,
+		       DISPLAY_ORDER                  as displayOrder,
+		       REMARK                         as remark,
+		       FORMAT_RULE                    as formatRule,
+		       UPPERCASE_AMOUNT_VARIABLE_NAME as uppercaseAmountVariableName
+		from DT_MANUAL_INPUT_FIELD_CONFIG
+		where 1=1
+		<if test="req.fileTemplateId!=null and req.fileTemplateId!=''">
+			and TEMPLATE_ID =#{req.fileTemplateId,jdbcType=VARCHAR}
+		</if>
+		<if test="req.fieldName!=null and req.fieldName!=''">
+			AND FIELD_NAME=#{req.fieldName,jdbcType=VARCHAR}
+		</if>
+		<if test="req.fieldVariableName!=null and req.fieldVariableName!=''">
+			AND FIELD_VARIABLE_NAME=#{req.fieldVariableName,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="querySingleManualInputFieldConfig"
+			resultType="cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldConfigListRes"
+			parameterType="string">
+		select MANUAL_INPUT_FIELD_CONFIG_ID   as manualInputFieldConfigId,
+		FIELD_NAME                     as fieldName,
+		FIELD_VARIABLE_NAME            as fieldVariableName,
+		TEMPLATE_ID                    as fileTemplateId,
+		FIELD_TYPE                     as fieldType,
+		F_DICT('MANUAL_INPUT_FIELD_TYPE', FIELD_TYPE) as fieldTypeText,
+		QUERY_SQL                      as querySql,
+		DEFAULT_VALUE                  as defaultValue,
+		RELATED_FIELD_ID               as relatedFieldId,
+		CHECK_REGEX                    as checkRegex,
+		IS_REQUIRED                    as isRequired,
+		DISPLAY_ORDER                  as displayOrder,
+		REMARK                         as remark,
+		FORMAT_RULE                    as formatRule,
+		UPPERCASE_AMOUNT_VARIABLE_NAME as uppercaseAmountVariableName
+		from DT_MANUAL_INPUT_FIELD_CONFIG
+		where MANUAL_INPUT_FIELD_CONFIG_ID = #{manualInputFieldConfigId,jdbcType=VARCHAR}
+	</select>
+</mapper>

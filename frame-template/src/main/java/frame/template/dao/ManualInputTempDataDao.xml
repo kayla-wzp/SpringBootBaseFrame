@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cffs.dao.dynamictemplate.ManualInputTempDataDao" >
+  <resultMap id="BaseResultMap" type="cffs.po.dynamictemplate.ManualInputTempData" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="BUSINESS_ID" property="businessId" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_PRIMARY_KEY" property="templatePrimaryKey" jdbcType="VARCHAR" />
+    <result column="SPLIT_DATA_ONE" property="splitDataOne" jdbcType="VARCHAR" />
+    <result column="SPLIT_DATA_TWO" property="splitDataTwo" jdbcType="VARCHAR" />
+    <result column="SPLIT_DATA_THERE" property="splitDataThere" jdbcType="VARCHAR" />
+    <result column="SPLIT_DATA_FOUR" property="splitDataFour" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BUSINESS_ID, TEMPLATE_PRIMARY_KEY, SPLIT_DATA_ONE, SPLIT_DATA_TWO,
+    SPLIT_DATA_THERE, SPLIT_DATA_FOUR
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DT_MANUAL_INPUT_TEMP_DATA
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DT_MANUAL_INPUT_TEMP_DATA
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cffs.po.dynamictemplate.ManualInputTempData" >
+    insert into DT_MANUAL_INPUT_TEMP_DATA (ID, BUSINESS_ID,
+      TEMPLATE_PRIMARY_KEY, SPLIT_DATA_ONE, SPLIT_DATA_TWO,
+      SPLIT_DATA_THERE, SPLIT_DATA_FOUR)
+    values (#{id,jdbcType=VARCHAR}, #{businessId,jdbcType=VARCHAR},
+      #{templatePrimaryKey,jdbcType=VARCHAR}, #{splitDataOne,jdbcType=VARCHAR}, #{splitDataTwo,jdbcType=VARCHAR},
+      #{splitDataThere,jdbcType=VARCHAR}, #{splitDataFour,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cffs.po.dynamictemplate.ManualInputTempData" >
+    insert into DT_MANUAL_INPUT_TEMP_DATA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="businessId != null" >
+        BUSINESS_ID,
+      </if>
+      <if test="templatePrimaryKey != null" >
+        TEMPLATE_PRIMARY_KEY,
+      </if>
+      <if test="splitDataOne != null" >
+        SPLIT_DATA_ONE,
+      </if>
+      <if test="splitDataTwo != null" >
+        SPLIT_DATA_TWO,
+      </if>
+      <if test="splitDataThere != null" >
+        SPLIT_DATA_THERE,
+      </if>
+      <if test="splitDataFour != null" >
+        SPLIT_DATA_FOUR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="businessId != null" >
+        #{businessId,jdbcType=VARCHAR},
+      </if>
+      <if test="templatePrimaryKey != null" >
+        #{templatePrimaryKey,jdbcType=VARCHAR},
+      </if>
+      <if test="splitDataOne != null" >
+        #{splitDataOne,jdbcType=VARCHAR},
+      </if>
+      <if test="splitDataTwo != null" >
+        #{splitDataTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="splitDataThere != null" >
+        #{splitDataThere,jdbcType=VARCHAR},
+      </if>
+      <if test="splitDataFour != null" >
+        #{splitDataFour,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cffs.po.dynamictemplate.ManualInputTempData" >
+    update DT_MANUAL_INPUT_TEMP_DATA
+    <set >
+      <if test="businessId != null" >
+        BUSINESS_ID = #{businessId,jdbcType=VARCHAR},
+      </if>
+      <if test="templatePrimaryKey != null" >
+        TEMPLATE_PRIMARY_KEY = #{templatePrimaryKey,jdbcType=VARCHAR},
+      </if>
+      <if test="splitDataOne != null" >
+        SPLIT_DATA_ONE = #{splitDataOne,jdbcType=VARCHAR},
+      </if>
+      <if test="splitDataTwo != null" >
+        SPLIT_DATA_TWO = #{splitDataTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="splitDataThere != null" >
+        SPLIT_DATA_THERE = #{splitDataThere,jdbcType=VARCHAR},
+      </if>
+      <if test="splitDataFour != null" >
+        SPLIT_DATA_FOUR = #{splitDataFour,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cffs.po.dynamictemplate.ManualInputTempData" >
+    update DT_MANUAL_INPUT_TEMP_DATA
+    set BUSINESS_ID = #{businessId,jdbcType=VARCHAR},
+      TEMPLATE_PRIMARY_KEY = #{templatePrimaryKey,jdbcType=VARCHAR},
+      SPLIT_DATA_ONE = #{splitDataOne,jdbcType=VARCHAR},
+      SPLIT_DATA_TWO = #{splitDataTwo,jdbcType=VARCHAR},
+      SPLIT_DATA_THERE = #{splitDataThere,jdbcType=VARCHAR},
+      SPLIT_DATA_FOUR = #{splitDataFour,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByBusinessIdAndTemplateId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+        <include refid="Base_Column_List" />
+    from DT_MANUAL_INPUT_TEMP_DATA
+    where BUSINESS_ID =#{businessId, jdbcType= VARCHAR} and TEMPLATE_PRIMARY_KEY=#{templateId, jdbcType= VARCHAR}
+  </select>
+  <delete id="deleteBusinessIdAndTemplateId" parameterType="java.lang.String" >
+    delete from DT_MANUAL_INPUT_TEMP_DATA
+    where BUSINESS_ID =#{businessId, jdbcType= VARCHAR} and TEMPLATE_PRIMARY_KEY=#{templateId, jdbcType= VARCHAR}
+  </delete>
+</mapper>

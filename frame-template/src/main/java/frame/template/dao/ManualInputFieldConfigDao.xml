@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cffs.dao.dynamictemplate.ManualInputFieldConfigDao" >
+  <resultMap id="BaseResultMap" type="cffs.po.dynamictemplate.ManualInputFieldConfig" >
+    <id column="MANUAL_INPUT_FIELD_CONFIG_ID" property="manualInputFieldConfigId" jdbcType="VARCHAR" />
+    <result column="FIELD_NAME" property="fieldName" jdbcType="VARCHAR" />
+    <result column="FIELD_VARIABLE_NAME" property="fieldVariableName" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_ID" property="fileTemplateId" jdbcType="VARCHAR" />
+    <result column="FIELD_TYPE" property="fieldType" jdbcType="VARCHAR" />
+    <result column="QUERY_SQL" property="querySql" jdbcType="VARCHAR" />
+    <result column="FORMAT_RULE" property="formatRule" jdbcType="VARCHAR" />
+    <result column="UPPERCASE_AMOUNT_VARIABLE_NAME" property="uppercaseAmountVariableName" jdbcType="VARCHAR" />
+    <result column="DEFAULT_VALUE" property="defaultValue" jdbcType="VARCHAR" />
+    <result column="RELATED_FIELD_ID" property="relatedFieldId" jdbcType="VARCHAR" />
+    <result column="CHECK_REGEX" property="checkRegex" jdbcType="VARCHAR" />
+    <result column="IS_REQUIRED" property="isRequired" jdbcType="VARCHAR" />
+    <result column="DISPLAY_ORDER" property="displayOrder" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MANUAL_INPUT_FIELD_CONFIG_ID, FIELD_NAME, FIELD_VARIABLE_NAME, TEMPLATE_ID,
+    FIELD_TYPE, QUERY_SQL, FORMAT_RULE, UPPERCASE_AMOUNT_VARIABLE_NAME, DEFAULT_VALUE,
+    RELATED_FIELD_ID, CHECK_REGEX, IS_REQUIRED, DISPLAY_ORDER, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DT_MANUAL_INPUT_FIELD_CONFIG
+    where MANUAL_INPUT_FIELD_CONFIG_ID = #{manualInputFieldConfigId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByTemplateId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from DT_MANUAL_INPUT_FIELD_CONFIG
+    where TEMPLATE_ID = #{fileTemplateId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DT_MANUAL_INPUT_FIELD_CONFIG
+    where MANUAL_INPUT_FIELD_CONFIG_ID = #{manualInputFieldConfigId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cffs.po.dynamictemplate.ManualInputFieldConfig" >
+    insert into DT_MANUAL_INPUT_FIELD_CONFIG (MANUAL_INPUT_FIELD_CONFIG_ID, FIELD_NAME,
+      FIELD_VARIABLE_NAME, TEMPLATE_ID,
+      FIELD_TYPE, QUERY_SQL, FORMAT_RULE, UPPERCASE_AMOUNT_VARIABLE_NAME, DEFAULT_VALUE,
+      RELATED_FIELD_ID, CHECK_REGEX, IS_REQUIRED, 
+      DISPLAY_ORDER, REMARK)
+    values (#{manualInputFieldConfigId,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, 
+      #{fieldVariableName,jdbcType=VARCHAR}, #{fileTemplateId,jdbcType=VARCHAR},
+      #{fieldType,jdbcType=VARCHAR}, #{querySql,jdbcType=VARCHAR}, #{formatRule,jdbcType=VARCHAR},
+      #{uppercaseAmountVariableName,jdbcType=VARCHAR},#{defaultValue,jdbcType=VARCHAR},
+      #{relatedFieldId,jdbcType=VARCHAR}, #{checkRegex,jdbcType=VARCHAR}, #{isRequired,jdbcType=VARCHAR}, 
+      #{displayOrder,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cffs.po.dynamictemplate.ManualInputFieldConfig" >
+    update DT_MANUAL_INPUT_FIELD_CONFIG
+    set FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+      FIELD_VARIABLE_NAME = #{fieldVariableName,jdbcType=VARCHAR},
+      TEMPLATE_ID = #{fileTemplateId,jdbcType=VARCHAR},
+      FIELD_TYPE = #{fieldType,jdbcType=VARCHAR},
+      QUERY_SQL = #{querySql,jdbcType=VARCHAR},
+      FORMAT_RULE = #{formatRule,jdbcType=VARCHAR},
+      UPPERCASE_AMOUNT_VARIABLE_NAME = #{uppercaseAmountVariableName,jdbcType=VARCHAR},
+      DEFAULT_VALUE = #{defaultValue,jdbcType=VARCHAR},
+      RELATED_FIELD_ID = #{relatedFieldId,jdbcType=VARCHAR},
+      CHECK_REGEX = #{checkRegex,jdbcType=VARCHAR},
+      IS_REQUIRED = #{isRequired,jdbcType=VARCHAR},
+      DISPLAY_ORDER = #{displayOrder,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where MANUAL_INPUT_FIELD_CONFIG_ID = #{manualInputFieldConfigId,jdbcType=VARCHAR}
+  </update>
+</mapper>

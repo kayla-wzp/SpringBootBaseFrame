@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/smalot-bootstrap-datetimepicker/2.4.4/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet"/>
+    <style>
+        html, body, .content {
+            height: 770px;
+            overflow: hidden;
+            font-family: PingFangSC-Medium;
+        }
+
+        .content {
+            display: flex;
+            display: -moz-flex;
+            display: -webkit-flex;
+            display: -ms-flex;
+            overflow: hidden;
+        }
+
+        .content .left-contract {
+            flex: 1;
+            overflow-y: scroll;
+            width: 80%;
+            height: 700px;
+            padding: 0 20px;
+        }
+
+        .content .right-form {
+            padding: 0 10px;
+            overflow-y: scroll;
+            width: 20%;
+            height: 700px;
+        }
+
+        .blue {
+            color: rgba(8, 99, 238, 1);
+        }
+
+        .title {
+            font-size: 14px;
+            margin: 18px 0;
+        }
+
+        .content .title, .title-tips {
+            text-align: center;
+        }
+
+        .contract .title {
+            font-size: 22px;
+            font-family: PingFangSC-Medium;
+            font-weight: 500;
+            color: #26292f;
+            text-align: center;
+        }
+
+        .contract .title-tips {
+            text-align: center;
+            font-size: 14px;
+            color: #a1a4a9;
+            margin-top: 20px;
+        }
+
+        .title .line {
+            border-bottom: 1px solid #0863ee;
+            min-width: 154px;
+            display: inline-block;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .title .line2 {
+            min-width: 30px;
+        }
+
+        .title .line3 {
+            min-width: 50px;
+        }
+
+        .t-center {
+            text-align: center;
+        }
+
+        .t-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="left-contract">
+        <div class='contract'>
+            <p></p>
+            <div class='title'>保理合同</div>
+            <div class="title-tips">(无追索权保理)</div>
+        </div>
+        <div>
+            <div class="title">编号: <span class='blue'>【<span class='exampleInputEmail1'></span>】</span></div>
+            <div class="title">
+                本协议由下列双方于<span class='blue'>【
+                                <span class="line line2">
+                                     <span class='datatime'></span></span
+                                >】</span>在 <span class='blue'>【
+                                <span class="line line3"><span class='remark'></span></span
+                                >】</span>市 <span class='blue'> 【
+                                <span class="line line3"><span class='selectExample'></span></span
+                                >】</span>区签订。
+
+            </div>
+        </div>
+        <div class="leftContent">
+            <p>甲方（保理人）：<span class="title"> <span class='blue'>【<span class='remark'></span>】</span></span></p>
+            <p>联系地址：<span class="title">【<span class='selectExample'></span>】</span></p>
+            <p>鉴于：</p>
+            <p>
+                1、甲方系依据中华人民共和国法律法规设立、可以从事保理服务的专业公司。
+            </p>
+            <p>
+                2、乙方是一家依法在中华人民共和国境内注册并合法存续的
+                <span class="title"> <span class='blue'>【<span class='remark'></span>】</span></span>，
+                乙方作为债权人将其与债务人之间形成的应收账款，向甲方申请办理无追索权保理业务。
+            </p>
+            <p class="t-right">
+                <span class="title">【 】</span>年 <span class="title">【 】</span>月
+                <span class="title">【 】</span>日
+            </p>
+        </div>
+    </div>
+    <div class="right-form">
+        <form id="contractForm">
+            <div class="form-group">
+                <label for="exampleInputEmail1">邮箱</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="exampleInputEmail1"
+                        name="exampleInputEmail1"
+                        onchange="backfillContract('exampleInputEmail1')"
+                />
+            </div>
+            <div class="form-group">
+                <label for="selectExample">地区</label>
+                <select class="form-control" id="selectExample" name="selectExample"
+                        onchange="backfillContract('selectExample','select')">
+                    <option value="null">请选择</option>
+                    <option value="a">西城区</option>
+                    <option value="b">东城区</option>
+                    <option value="c">海淀区</option>
+                    <option value="d">朝阳区</option>
+                    <option value="e">昌平区</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>选择日期：</label>
+                <!--指定 date标记-->
+                <div class="input-group date" id="datetimepicker">
+                        <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                    <input type="text" class="form-control" name='datatime' id='datatime' autocomplete='off'
+                           onchange="backfillContract('datatime')"/>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="remark">备注</label>
+                <textarea class="form-control" rows="3" name="remark" id="remark"
+                          onchange="backfillContract('remark')"></textarea>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="./static/js/jquery.min.js"></script>
+<script src="./static/js/bootstrap.min.js"></script>
+<script src="./static/js/bootstrapValidator.min.js"></script>
+<script src="./static/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+    $(function () {
+        $.fn.serializeObject = function () {
+            var a, o, h, i, e;
+            a = this.serializeArray();
+            o = {};
+            h = o.hasOwnProperty;
+            for (i = 0; i < a.length; i++) {
+                e = a[i];
+                if (!h.call(o, e.name)) {
+                    o[e.name] = e.value;
+                }
+            }
+            return o;
+        }
+        // 日期控件中文
+        $.fn.datetimepicker.dates['zh-CN'] = {
+            days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+            daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+            daysMin: ["日", "一", "二", "三", "四", "五", "六", "日"],
+            months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            today: "今天",
+            suffix: [],
+            meridiem: ["上午", "下午"]
+        };
+        initForm()
+
+
+    });
+
+    // 回填合同
+    function backfillContract(target, select) {
+        console.log($("." + target));
+        if (select) {
+            $("." + target).html($("#" + target).find("option:selected").text())
+        } else {
+            $("." + target).html($("#" + target).val());
+
+        }
+    }
+
+    // 初始化
+    function initForm() {
+
+        // 配置表单校验
+        $('#contractForm').bootstrapValidator({
+            live: 'enabled', // enabled代表当表单控件内容发生变化时就触发验证，默认提交时验证，
+            // disabled和submitted代表当点击提交按钮时触发验证
+
+            feedbackIcons: {  // 显示表单验证结果的图标
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                exampleInputEmail1: {
+                    validators: {
+                        notEmpty: {
+                            message: 'email不能为空'
+                        },
+                        regexp: {
+                            regexp: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,  // 正则规则用两个/包裹起来
+                            message: 'email格式有误,请重新输入'
+                        }
+                    }
+                },
+                selectExample: {
+                    validators: {
+                        notEmpty: {
+                            message: '请选择'
+                        },
+                        callback: {
+                            message: '请选择',
+                            callback: function (value, validator) {
+                                if (value === 'null') {
+                                    return false;
+                                } else {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                },
+                remark: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入'
+                        },
+                        callback: {
+                            message: '存在特殊字符,请重新输入',
+                            callback: function (value, validator) {
+                                const reg = new RegExp("[`@^&|{}?''\"\\[\\]<>@&—|{}'？%]")
+                                if (reg.test(value)) {
+                                    return false;
+                                } else {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                },
+                datatime: {
+                    trigger: 'change',
+                    validators: {
+                        notEmpty: {
+                            message: '请选择日期'
+                        },
+                        date: {
+                            format: 'YYYY-MM-DD',
+                            message: '请选择正确的日期'
+                        }
+                    }
+                }
+            }
+        })
+        // 配置日期插件
+        $("#datetimepicker").datetimepicker({
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+            autoclose: true,
+            weekStart: 1,
+            todayBtn: 1,   // 今日日期按钮
+            autoclose: 1,   // 自动关闭
+            todayHighlight: 1,   // 高亮今日日期
+            startView: 2,       // 从日期视图开始
+            minView: 2,
+            forceParse: 0
+
+
+        }).on('changeDate', function () {
+            const data = $('#contractForm').data("bootstrapValidator")
+            data.validateField('datatime')
+        });
+
+    }
+
+    function sendFormData() {
+        const validator = $('#contractForm').data("bootstrapValidator"); // 获取validator对象
+        validator.validate(); // 手动触发验证
+        console.log(validator.isValid())
+        if (validator.isValid()) {
+            var loginData = $('#contractForm').serializeObject()
+            console.log(loginData)
+            window.parent['handleSpanClick'](validator.isValid(), loginData)
+        } else {
+            window.parent['handleSpanClick'](validator.isValid())
+        }
+    }
+
+</script>
+</body>
+</html>

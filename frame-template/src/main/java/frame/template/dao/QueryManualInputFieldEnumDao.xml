@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cffs.manage.query.dao.dynamictemplate.QueryManualInputFieldEnumDao">
+
+
+    <select id="queryManualInputFieldEnumList"
+            resultType="cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldEnumListRes"
+            parameterType="string">
+			select MANUAL_INPUT_FIELD_CONFIG_ID as manualInputFieldConfigId,
+			       ENUM_KEY                     as enumKey,
+			       ENUM_VALUE                   as enumValue,
+			       DISPLAY_ORDER                as displayOrder
+			from DT_MANUAL_INPUT_FIELD_ENUM
+			where MANUAL_INPUT_FIELD_CONFIG_ID = #{manualInputFieldConfigId,jdbcType=VARCHAR}
+	</select>
+</mapper>

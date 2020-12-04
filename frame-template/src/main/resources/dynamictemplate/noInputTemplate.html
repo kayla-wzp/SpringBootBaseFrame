@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/smalot-bootstrap-datetimepicker/2.4.4/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet"/>
+    <style>
+        html, body, .content {
+            height: 770px;
+            overflow: hidden;
+            font-family: PingFangSC-Medium;
+        }
+
+        .content {
+            display: flex;
+            display: -moz-flex;
+            display: -webkit-flex;
+            display: -ms-flex;
+            overflow: hidden;
+        }
+
+        .content .left-contract {
+            flex: 1;
+            overflow-y: scroll;
+            width: 80%;
+            height: 700px;
+            padding: 0 20px;
+        }
+
+        .content .right-form {
+            padding: 0 10px;
+            overflow-y: scroll;
+            width: 20%;
+            height: 700px;
+        }
+
+        .blue {
+            color: rgba(8, 99, 238, 1);
+        }
+
+        .title {
+            font-size: 14px;
+            margin: 18px 0;
+        }
+
+        .content .title, .title-tips {
+            text-align: center;
+        }
+
+        .contract .title {
+            font-size: 22px;
+            font-family: PingFangSC-Medium;
+            font-weight: 500;
+            color: #26292f;
+            text-align: center;
+        }
+
+        .contract .title-tips {
+            text-align: center;
+            font-size: 14px;
+            color: #a1a4a9;
+            margin-top: 20px;
+        }
+
+        .title .line {
+            border-bottom: 1px solid #0863ee;
+            min-width: 154px;
+            display: inline-block;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .title .line2 {
+            min-width: 30px;
+        }
+
+        .title .line3 {
+            min-width: 50px;
+        }
+
+        .t-center {
+            text-align: center;
+        }
+
+        .t-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="left-contract">
+        ${templateStr}
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<title></title>
+<style type='text/css'>
+	body {
+		font-family:SimSun;
+		}
+	table {
+		border-collapse: collapse; margin: 0 auto; width: 100%;
+		}
+	td {
+		border: #000000 solid 0.75pt; vertical-align: top; padding:5pt;
+		}
+	p{
+		line-height: 18pt; margin:0pt 0pt 10pt; text-indent: 21pt
+		}
+	span{
+		font-size: 10.5pt;
+		}
+	
+</style>
+</head>
+<body>
+	<div>
+		<p style="text-align: center;">
+			<span style="font-size: 14pt; font-weight: bold">保理合同</span>
+		</p>
+		<p style="text-align: center;">
+			<span style="font-weight: bold">（无追索权保理）</span>
+		</p>
+
+		<p style="text-align: left;">
+			<span>手动输入日期
+				<!--【 】年【 】月【 】日-->
+				${contractSigningDate!''}
+				签署地点：手动输入带默认值【${contractSigningCity!''}】</span>
+		</p>
+		<p>
+			<span>联系地址：签署地点：手动输入不带默认值${factorAddress!''}</span>
+		</p>
+	
+		<p>
+			<span>下拉框 带查询</span>
+		</p>
+		<p style="text-indent: 3em;">
+			<span>户名：${factorBankAccount.factorBankAccountName!''}；</span>
+		</p>
+		<p style="text-indent: 3em;">
+			<span>账号：${factorBankAccount.factorBankAccountNo!''}；</span>
+		</p>
+		<p style="text-indent: 3em;">
+			<span>开户行：${factorBankAccount.factorAccountBank!''}。</span>
+		</p>
+	
+
+		
+		<p>
+			<span>回显对象  取值 </span>
+		</p>
+
+		<table border="1" style="font-size:8.5pt">
+			<tr>
+				<th width="6%">序号</th>
+				<th width="15%">基础合同编号</th>
+				<th width="15%">基础合同项下应收账款总额（元）</th>
+				<th width="15%">应收账款到期日</th>
+
+			</tr>
+			<tr>
+				<td style="text-align: center;">1</td>
+				<td>${factoringReqObject.contractNo!''}</td>
+				<td>${factoringReqObject.receivablesAmount!''}</td>
+
+				<td>${factoringReqObject.receivablesDate!''}</td>
+
+			</tr>
+
+		</table>
+		 
+		<p><span>邮箱：带正则 ${factorContactMail!''}。</span></p>
+		<p>
+			<span>下拉框 枚举值</span>
+		</p>
+		<p><span>选择：${choice!''}。</span></p>
+	</div>
+</body>
+</html>

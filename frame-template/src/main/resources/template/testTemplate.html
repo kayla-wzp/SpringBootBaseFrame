@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/smalot-bootstrap-datetimepicker/2.4.4/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet"/>
+    <style>
+        html, body, .content {
+            height: 770px;
+            overflow: hidden;
+            font-family: PingFangSC-Medium;
+        }
+
+        .content {
+            display: flex;
+            display: -moz-flex;
+            display: -webkit-flex;
+            display: -ms-flex;
+            overflow: hidden;
+        }
+
+        .content .left-contract {
+            flex: 1;
+            overflow-y: scroll;
+            width: 80%;
+            height: 700px;
+            padding: 0 20px;
+        }
+
+        .content .right-form {
+            padding: 0 10px;
+            overflow-y: scroll;
+            width: 20%;
+            height: 700px;
+        }
+
+        .blue {
+            color: rgba(8, 99, 238, 1);
+        }
+
+        .title {
+            font-size: 14px;
+            margin: 18px 0;
+        }
+
+        .content .title, .title-tips {
+            text-align: center;
+        }
+
+        .contract .title {
+            font-size: 22px;
+            font-family: PingFangSC-Medium;
+            font-weight: 500;
+            color: #26292f;
+            text-align: center;
+        }
+
+        .contract .title-tips {
+            text-align: center;
+            font-size: 14px;
+            color: #a1a4a9;
+            margin-top: 20px;
+        }
+
+        .title .line {
+            border-bottom: 1px solid #0863ee;
+            min-width: 154px;
+            display: inline-block;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .title .line2 {
+            min-width: 30px;
+        }
+
+        .title .line3 {
+            min-width: 50px;
+        }
+
+        .t-center {
+            text-align: center;
+        }
+
+        .t-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="left-contract">
+        ${templateStr}
+    </div>
+    <div class="right-form">
+        <form id="contractForm">
+            ${fillComponents}
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="./static/js/jquery.min.js"></script>
+<script src="./static/js/bootstrap.min.js"></script>
+<script src="./static/js/bootstrapValidator.min.js"></script>
+<script src="./static/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+    $(function () {
+        $.fn.serializeObject = function () {
+            var a, o, h, i, e;
+            a = this.serializeArray();
+            o = {};
+            h = o.hasOwnProperty;
+            for (i = 0; i < a.length; i++) {
+                e = a[i];
+                if (!h.call(o, e.name)) {
+                    o[e.name] = e.value;
+                }
+            }
+            return o;
+        }
+        // 日期控件中文
+        $.fn.datetimepicker.dates['zh-CN'] = {
+            days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+            daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+            daysMin: ["日", "一", "二", "三", "四", "五", "六", "日"],
+            months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            today: "今天",
+            suffix: [],
+            meridiem: ["上午", "下午"]
+        };
+        initForm()
+
+
+    });
+
+    // 回填合同
+    function backfillContract(target, select) {
+        var t_target = 't_' + target;
+        if (select) {
+            var item = $("#" + target).val();
+            if (isJSON(item)) {
+                item = JSON.parse(item)
+                for (let span of $('[' + t_target + ']')) {
+                    let attrValue = $(span).attr(t_target);
+                    $(span).html(item[attrValue]);
+                }
+            } else {
+                $('[' + t_target + ']').html($("#" + target).find("option:selected").text())
+            }
+        } else {
+            $('[' + t_target + ']').html($("#" + target).val());
+
+        }
+    }
+
+    function isJSON(str) {
+        if (typeof str == 'string') {
+            try {
+                var obj = JSON.parse(str);
+                if (typeof obj == 'object' && obj) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (e) {
+                return false;
+            }
+        }
+    }
+
+    // 初始化
+    function initForm() {
+
+        // 配置表单校验
+        $('#contractForm').bootstrapValidator({
+            live: 'enabled', // enabled代表当表单控件内容发生变化时就触发验证，默认提交时验证，
+            // disabled和submitted代表当点击提交按钮时触发验证
+
+            feedbackIcons: {  // 显示表单验证结果的图标
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                ${fillComponentsJsValidator}
+            }
+        })
+        ${fillComponentsJs}
+    }
+
+    function sendFormData() {
+        const validator = $('#contractForm').data("bootstrapValidator"); // 获取validator对象
+        validator.validate(); // 手动触发验证
+        console.log(validator.isValid())
+        if (validator.isValid()) {
+            var loginData = $('#contractForm').serializeObject()
+            console.log(loginData)
+            window.parent['handleSpanClick'](validator.isValid(), loginData)
+        } else {
+            window.parent['handleSpanClick'](validator.isValid())
+        }
+    }
+
+</script>
+</body>
+</html>

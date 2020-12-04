@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cffs.dao.dynamictemplate.ManualInputFieldEnumDao" >
+  <resultMap id="BaseResultMap" type="cffs.po.dynamictemplate.ManualInputFieldEnum" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MANUAL_INPUT_FIELD_CONFIG_ID" property="manualInputFieldConfigId" jdbcType="VARCHAR" />
+    <result column="ENUM_KEY" property="enumKey" jdbcType="VARCHAR" />
+    <result column="ENUM_VALUE" property="enumValue" jdbcType="VARCHAR" />
+    <result column="DISPLAY_ORDER" property="displayOrder" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MANUAL_INPUT_FIELD_CONFIG_ID, ENUM_KEY, ENUM_VALUE, DISPLAY_ORDER
+  </sql>
+
+  <select id="selectByManualInputFieldConfigId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from DT_MANUAL_INPUT_FIELD_ENUM
+    where MANUAL_INPUT_FIELD_CONFIG_ID = #{manualInputFieldConfigId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByManualInputFieldConfigId" parameterType="java.lang.String" >
+    delete from DT_MANUAL_INPUT_FIELD_ENUM
+    where MANUAL_INPUT_FIELD_CONFIG_ID = #{manualInputFieldConfigId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="batchInsert" parameterType="cffs.po.dynamictemplate.ManualInputFieldEnum">
+    insert into DT_MANUAL_INPUT_FIELD_ENUM (ID, MANUAL_INPUT_FIELD_CONFIG_ID, ENUM_KEY,
+    ENUM_VALUE, DISPLAY_ORDER)
+    select a.*
+    from
+    (<foreach collection="list" open="(" separator="union all" close=")" item="item">
+    select #{item.id},#{item.manualInputFieldConfigId},#{item.invoiceCode},
+    #{item.enumKey}, #{item.enumValue},#{item.displayOrder}
+    from dual
+  </foreach>) a
+  </insert>
+</mapper>

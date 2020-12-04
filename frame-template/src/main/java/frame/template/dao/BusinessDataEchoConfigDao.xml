@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cffs.dao.dynamictemplate.BusinessDataEchoConfigDao" >
+  <resultMap id="BaseResultMap" type="cffs.po.dynamictemplate.BusinessDataEchoConfig" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_PRIMARY_KEY" property="templatePrimaryKey" jdbcType="VARCHAR" />
+    <result column="OBJECT_ATTRIBUTE_NAME" property="objectAttributeName" jdbcType="VARCHAR" />
+    <result column="OBJECT_TYPE" property="objectType" jdbcType="VARCHAR" />
+    <result column="QUERY_SQL" property="querySql" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TEMPLATE_PRIMARY_KEY, OBJECT_ATTRIBUTE_NAME, OBJECT_TYPE, QUERY_SQL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DT_BUSINESS_DATA_ECHO_CONFIG
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByTemplateId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from DT_BUSINESS_DATA_ECHO_CONFIG
+    where TEMPLATE_PRIMARY_KEY = #{templateId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DT_BUSINESS_DATA_ECHO_CONFIG
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cffs.po.dynamictemplate.BusinessDataEchoConfig" >
+    insert into DT_BUSINESS_DATA_ECHO_CONFIG (ID, TEMPLATE_PRIMARY_KEY, OBJECT_ATTRIBUTE_NAME,
+      OBJECT_TYPE, QUERY_SQL)
+    values (#{id,jdbcType=VARCHAR}, #{templatePrimaryKey,jdbcType=VARCHAR}, #{objectAttributeName,jdbcType=VARCHAR}, 
+      #{objectType,jdbcType=VARCHAR}, #{querySql,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cffs.po.dynamictemplate.BusinessDataEchoConfig" >
+    insert into DT_BUSINESS_DATA_ECHO_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="templatePrimaryKey != null" >
+        TEMPLATE_PRIMARY_KEY,
+      </if>
+      <if test="objectAttributeName != null" >
+        OBJECT_ATTRIBUTE_NAME,
+      </if>
+      <if test="objectType != null" >
+        OBJECT_TYPE,
+      </if>
+      <if test="querySql != null" >
+        QUERY_SQL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="templatePrimaryKey != null" >
+        #{templatePrimaryKey,jdbcType=VARCHAR},
+      </if>
+      <if test="objectAttributeName != null" >
+        #{objectAttributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="objectType != null" >
+        #{objectType,jdbcType=VARCHAR},
+      </if>
+      <if test="querySql != null" >
+        #{querySql,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cffs.po.dynamictemplate.BusinessDataEchoConfig" >
+    update DT_BUSINESS_DATA_ECHO_CONFIG
+    <set >
+      <if test="templatePrimaryKey != null" >
+        TEMPLATE_PRIMARY_KEY = #{templatePrimaryKey,jdbcType=VARCHAR},
+      </if>
+      <if test="objectAttributeName != null" >
+        OBJECT_ATTRIBUTE_NAME = #{objectAttributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="objectType != null" >
+        OBJECT_TYPE = #{objectType,jdbcType=VARCHAR},
+      </if>
+      <if test="querySql != null" >
+        QUERY_SQL = #{querySql,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cffs.po.dynamictemplate.BusinessDataEchoConfig" >
+    update DT_BUSINESS_DATA_ECHO_CONFIG
+    set TEMPLATE_PRIMARY_KEY = #{templatePrimaryKey,jdbcType=VARCHAR},
+      OBJECT_ATTRIBUTE_NAME = #{objectAttributeName,jdbcType=VARCHAR},
+      OBJECT_TYPE = #{objectType,jdbcType=VARCHAR},
+      QUERY_SQL = #{querySql,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

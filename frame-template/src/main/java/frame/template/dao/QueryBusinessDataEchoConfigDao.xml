@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cffs.manage.query.dao.dynamictemplate.QueryBusinessDataEchoConfigDao">
+    <select id="queryBusinessDataEchoConfigList"
+            resultType="cffs.manage.query.vo.dynamictemplate.QueryBusinessDataEchoConfigListRes">
+     select
+        t.id as businessDataEchoConfigId,
+        t.template_primary_key as fileTemplateId,
+        t.object_attribute_name as objectAttributeName,
+        t.object_type as objectType,
+        f_dict('OBJECT_TYPE', t.object_type) as objectTypeText,
+        t.query_sql as querySql
+   from DT_BUSINESS_DATA_ECHO_CONFIG t
+        where 1=1
+        <if test="fileTemplateId !=null and fileTemplateId !=''">
+           and t.template_primary_key = #{fileTemplateId,jdbcType=VARCHAR}
+        </if>
+        <if test="objectAttributeName!=null and objectAttributeName!=''">
+            and t.object_attribute_name LIKE '%'||#{objectAttributeName,jdbcType=VARCHAR}||'%'
+        </if>
+	</select>
+</mapper>
