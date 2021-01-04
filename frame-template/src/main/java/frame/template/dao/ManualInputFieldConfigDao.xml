@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cffs.dao.dynamictemplate.ManualInputFieldConfigDao" >
-  <resultMap id="BaseResultMap" type="cffs.po.dynamictemplate.ManualInputFieldConfig" >
+<mapper namespace="frame.template.dao.ManualInputFieldConfigDao" >
+  <resultMap id="BaseResultMap" type="frame.template.vo.ManualInputFieldConfig" >
     <id column="MANUAL_INPUT_FIELD_CONFIG_ID" property="manualInputFieldConfigId" jdbcType="VARCHAR" />
     <result column="FIELD_NAME" property="fieldName" jdbcType="VARCHAR" />
     <result column="FIELD_VARIABLE_NAME" property="fieldVariableName" jdbcType="VARCHAR" />
@@ -38,7 +38,7 @@
     delete from DT_MANUAL_INPUT_FIELD_CONFIG
     where MANUAL_INPUT_FIELD_CONFIG_ID = #{manualInputFieldConfigId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cffs.po.dynamictemplate.ManualInputFieldConfig" >
+  <insert id="insert" parameterType="frame.template.vo.ManualInputFieldConfig" >
     insert into DT_MANUAL_INPUT_FIELD_CONFIG (MANUAL_INPUT_FIELD_CONFIG_ID, FIELD_NAME,
       FIELD_VARIABLE_NAME, TEMPLATE_ID,
       FIELD_TYPE, QUERY_SQL, FORMAT_RULE, UPPERCASE_AMOUNT_VARIABLE_NAME, DEFAULT_VALUE,
@@ -51,7 +51,7 @@
       #{relatedFieldId,jdbcType=VARCHAR}, #{checkRegex,jdbcType=VARCHAR}, #{isRequired,jdbcType=VARCHAR}, 
       #{displayOrder,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="cffs.po.dynamictemplate.ManualInputFieldConfig" >
+  <update id="updateByPrimaryKey" parameterType="frame.template.vo.ManualInputFieldConfig" >
     update DT_MANUAL_INPUT_FIELD_CONFIG
     set FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
       FIELD_VARIABLE_NAME = #{fieldVariableName,jdbcType=VARCHAR},

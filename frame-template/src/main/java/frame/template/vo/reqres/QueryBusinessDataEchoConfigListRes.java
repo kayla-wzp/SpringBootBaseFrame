@@ -1,6 +1,5 @@
 package frame.template.vo.reqres;
 
-import asset.frame.vo.QueryResBody;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,11 +1,9 @@
 package frame.template.factory.component;
 
-
-
-import asset.common.component.BeanFactory;
-import cffs.dao.dynamictemplate.ManualInputFieldEnumDao;
-import cffs.po.dynamictemplate.ManualInputFieldConfig;
-import cffs.po.dynamictemplate.ManualInputFieldEnum;
+import frame.template.common.BeanFactory;
+import frame.template.dao.ManualInputFieldEnumDao;
+import frame.template.vo.ManualInputFieldConfig;
+import frame.template.vo.ManualInputFieldEnum;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -42,7 +40,7 @@ public class EnumSelectComponent extends HtmlComponentFactory {
 		sb.append("<div class='form-group'><label for='" + fieldVariableName + "'>" + fieldName + "</label>"
 				+ "<select class='form-control' id='" + fieldVariableName + "'name='" + fieldVariableName + "'"
 				+ "        onchange=\"backfillContract('" + fieldVariableName + "','select')\">"
-				+ "    <option value='null'>��ѡ��</option>");
+				+ "    <option value='null'>请选择</option>");
 		for (ManualInputFieldEnum manualInputFieldEnum : optionList) {
 			sb.append("<option value='" + manualInputFieldEnum.getEnumKey() + "'");
 			if (StringUtils.isNotBlank(fieldVariableValue)
@@ -62,9 +60,8 @@ public class EnumSelectComponent extends HtmlComponentFactory {
 
 	@Override
 	public String getFillComponentsJsValidator() {
-		return fieldVariableName + ": {validators: {notEmpty: {message: '��ѡ��'},callback: {message: '��ѡ��',"
+		return fieldVariableName + ": {validators: {notEmpty: {message: '请选择'},callback: {message: '请选择',"
 				+ "callback: function (value, validator) {"
 				+ "if (value === 'null') {return false;} else {return true;}}}}}";
 	}
-
 }

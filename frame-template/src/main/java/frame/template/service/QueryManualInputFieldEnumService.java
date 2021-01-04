@@ -1,8 +1,8 @@
 package frame.template.service;
 
-import cffs.manage.query.dao.dynamictemplate.QueryManualInputFieldEnumDao;
-import cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldEnumListReq;
-import cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldEnumListRes;
+import frame.template.dao.QueryManualInputFieldEnumDao;
+import frame.template.vo.reqres.QueryManualInputFieldEnumListReq;
+import frame.template.vo.reqres.QueryManualInputFieldEnumListRes;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

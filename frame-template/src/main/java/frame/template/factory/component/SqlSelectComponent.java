@@ -1,8 +1,8 @@
 package frame.template.factory.component;
 
-import asset.common.component.BeanFactory;
-import cffs.core.service.dynamictemplate.DynamicSqlService;
-import cffs.po.dynamictemplate.ManualInputFieldConfig;
+import frame.template.common.BeanFactory;
+import frame.template.service.DynamicSqlService;
+import frame.template.vo.ManualInputFieldConfig;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
@@ -47,7 +47,7 @@ public class SqlSelectComponent extends HtmlComponentFactory {
 		sb.append("<div class='form-group'><label for='" + super.fieldVariableName + "'>" + super.fieldName + "</label>"
 				+ "<select class='form-control' id='" + super.fieldVariableName + "'name='" + super.fieldVariableName
 				+ "'" + "        onchange=\"backfillContract('" + super.fieldVariableName + "','select')\">"
-				+ "    <option value='null'>��ѡ��</option>");
+				+ "    <option value='null'>请选择</option>");
 		for (Map<String, Object> map : this.optionList) {
 			String jsonString = JSON.toJSONString(map);
 			sb.append("<option value='" + jsonString + "'");
@@ -67,7 +67,7 @@ public class SqlSelectComponent extends HtmlComponentFactory {
 
 	@Override
 	public String getFillComponentsJsValidator() {
-		return fieldVariableName + ": {validators: {notEmpty: {message: '��ѡ��'},callback: {message: '��ѡ��',"
+		return fieldVariableName + ": {validators: {notEmpty: {message: '请选择'},callback: {message: '请选择',"
 				+ "callback: function (value, validator) {"
 				+ "if (value === 'null') {return false;} else {return true;}}}}}";
 	}

@@ -1,4 +1,4 @@
-package cffs.core.service.dynamictemplate;
+package frame.template.factory;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,34 +14,31 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import asset.common.exception.RuleException;
-import asset.common.util.collection.CollectionUtil;
-import asset.common.util.str.StrUtil;
-import asset.frame.constant.errcode.ErrCodeSys;
-import asset.frame.constant.system.CharsetConst;
-import cffs.core.constant.PathConst;
-import cffs.core.constant.dynamictemplate.BusinessDataEchoObjectTypeEnum;
-import cffs.core.constant.dynamictemplate.ManualInputFieldTypeConst;
-import cffs.core.service.dynamictemplate.component.DateBoxComponent;
-import cffs.core.service.dynamictemplate.component.EnumSelectComponent;
-import cffs.core.service.dynamictemplate.component.HtmlComponentFactory;
-import cffs.core.service.dynamictemplate.component.InputComponent;
-import cffs.core.service.dynamictemplate.component.SqlSelectComponent;
-import cffs.core.util.export.PdfExportUtil;
-import cffs.dao.dynamictemplate.BusinessDataEchoConfigDao;
-import cffs.dao.dynamictemplate.ManualInputFieldConfigDao;
-import cffs.dao.dynamictemplate.ManualInputTempDataDao;
-import cffs.po.dynamictemplate.BusinessDataEchoConfig;
-import cffs.po.dynamictemplate.ManualInputFieldConfig;
-import cffs.po.dynamictemplate.ManualInputTempData;
+import frame.template.common.BusinessDataEchoObjectTypeEnum;
+import frame.template.common.CharsetConst;
+import frame.template.common.ManualInputFieldTypeConst;
+import frame.template.common.PathConst;
+import frame.template.common.util.CollectionUtil;
+import frame.template.common.util.PdfExportUtil;
+import frame.template.common.util.StrUtil;
+import frame.template.factory.component.DateBoxComponent;
+import frame.template.factory.component.EnumSelectComponent;
+import frame.template.factory.component.HtmlComponentFactory;
+import frame.template.factory.component.InputComponent;
+import frame.template.factory.component.SqlSelectComponent;
+import frame.template.dao.BusinessDataEchoConfigDao;
+import frame.template.dao.ManualInputFieldConfigDao;
+import frame.template.dao.ManualInputTempDataDao;
+import frame.template.service.DynamicSqlService;
+import frame.template.vo.BusinessDataEchoConfig;
+import frame.template.vo.ManualInputFieldConfig;
+import frame.template.vo.ManualInputTempData;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSON;
-
 
 import javax.annotation.Resource;
 
@@ -162,7 +159,7 @@ public class DynamicTemplateFactory {
 			} else if (ManualInputFieldTypeConst.SQL_SELECT.equals(fieldType)) {
 				htmlComponent = new SqlSelectComponent(manualInputFieldConfig, fieldVariableValue, enterParamMap);
 			} else {
-				throw new RuleException(ErrCodeSys.SYS_ERR, "不存在的输入框类型");
+				log.debug("不存在的输入框类型");
 			}
 			return htmlComponent;
 		}
@@ -227,7 +224,6 @@ public class DynamicTemplateFactory {
 			inputStream = new ByteArrayInputStream(sb.toString().getBytes(CharsetConst.UTF8));
 		} catch (IOException e) {
 			log.error("修改模板流异常==>{}", e);
-			throw new RuleException(ErrCodeSys.SYS_ERR, "修改模板流异常");
 		}
 		return inputStream;
 	}

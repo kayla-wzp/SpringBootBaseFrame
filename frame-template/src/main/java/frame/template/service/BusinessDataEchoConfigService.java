@@ -25,7 +25,6 @@ public class BusinessDataEchoConfigService {
 		businessDataEchoConfigDao.insertSelective(businessDataEchoConfig);
 	}
 
-
 	public void modifyBusinessDataEchoConfig(BusinessDataEchoConfigDto dto) {
 		validateIdExist(dto.getBusinessDataEchoConfigId());
 		validateTemplateId(dto);
@@ -39,13 +38,13 @@ public class BusinessDataEchoConfigService {
 	}
 
 	private void validateTemplateId(BusinessDataEchoConfigDto dto) {
-		if (dynamicFileTemplateDao.selectByPrimaryKey(dto.getTemplateId())==null){
+		if (dynamicFileTemplateDao.selectByPrimaryKey(dto.getTemplateId()) == null) {
 			log.debug("ƒ£∞ÂID¥ÌŒÛ");
 		}
 	}
 
 	private void validateIdExist(String businessDataEchoConfigId) {
-		if (businessDataEchoConfigDao.selectByPrimaryKey(businessDataEchoConfigId)==null){
+		if (businessDataEchoConfigDao.selectByPrimaryKey(businessDataEchoConfigId) == null) {
 			log.debug("ªÿœ‘≈‰÷√ID");
 		}
 	}

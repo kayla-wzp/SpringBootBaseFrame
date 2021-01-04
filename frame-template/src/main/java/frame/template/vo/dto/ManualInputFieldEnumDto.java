@@ -1,7 +1,7 @@
 package frame.template.vo.dto;
 
-import cffs.core.dto.BaseDto;
-import cffs.po.dynamictemplate.ManualInputFieldEnum;
+import frame.template.common.BaseDto;
+import frame.template.vo.ManualInputFieldEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,17 +1,12 @@
 package frame.template.factory.component;
 
-
 import java.util.Map;
-
 import frame.template.vo.ManualInputFieldConfig;
-import org.apache.commons.lang3.StringUtils;
-
 
 public class InputComponent extends HtmlComponentFactory {
 
-
 	public InputComponent(ManualInputFieldConfig manualInputFieldConfig, String fieldVariableValue,
-                          Map<String, Object> enterParamMap) {
+			Map<String, Object> enterParamMap) {
 		super(manualInputFieldConfig, fieldVariableValue, enterParamMap);
 	}
 
@@ -37,13 +32,12 @@ public class InputComponent extends HtmlComponentFactory {
 	public String getFillComponentsJsValidator() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(fieldVariableName).append(": {validators: {notEmpty: {message: '").append(fieldName)
-				.append("����Ϊ��' }");
+				.append("不能为空' }");
 		if (checkRegex != null) {
 			sb.append(",regexp: {regexp: ").append(checkRegex).append(",message: '").append(fieldName)
-					.append("��ʽ����,����������'}");
+					.append("格式有误,请重新输入'}");
 		}
 		sb.append("}}");
 		return sb.toString();
 	}
-
 }

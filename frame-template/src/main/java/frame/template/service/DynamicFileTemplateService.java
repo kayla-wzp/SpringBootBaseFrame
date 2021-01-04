@@ -1,34 +1,23 @@
 package frame.template.service;
 
-import asset.common.file.common.errcode.ErrCodeFile;
-import asset.common.util.date.TimeProvider;
-import asset.common.validate.Validator;
-import asset.frame.util.file.FileUtil;
-import cffs.core.constant.db.SeqNormalConst;
-import cffs.core.constant.errcode.ErrCodeCommon;
-import cffs.core.service.SeqService;
-import cffs.dao.dynamictemplate.DynamicFileTemplateDao;
-import cffs.dao.resource.UploadFileDao;
-import cffs.manage.dto.dynamictemplate.DeleteFileTemplateDto;
-import cffs.manage.dto.dynamictemplate.DynamicFileTemplateDto;
-import cffs.po.dynamictemplate.DynamicFileTemplate;
-import cffs.po.resource.UploadFile;
+import frame.template.vo.dto.DeleteFileTemplateDto;
+import frame.template.vo.dto.DynamicFileTemplateDto;
+import frame.template.dao.DynamicFileTemplateDao;
+import frame.template.vo.DynamicFileTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.UUID;
 
 @Service
+@Slf4j
 public class DynamicFileTemplateService {
 
 	@Resource
 	private DynamicFileTemplateDao dynamicFileTemplateDao;
-	@Resource
-	private UploadFileDao uploadFileDao;
-	@Resource
-	private SeqService seqService;
-	@Resource
-	private TimeProvider timeProvider;
 
 	private static final String SAVE = "1";
 	private static final String UPDATE = "2";
@@ -50,8 +39,7 @@ public class DynamicFileTemplateService {
 	}
 
 	private void validateFileId(DynamicFileTemplateDto dto) {
-		Validator.assertNotNull(uploadFileDao.selectById(dto.getFileId()), ErrCodeCommon.CO_RECORD_IS_NOT_EXIST,
-				"上传的文件");
+		log.debug("校验上传的文件不能为空");
 	}
 
 	private void saveFile(DynamicFileTemplateDto dto, String saveOrUpdate) {
@@ -63,33 +51,27 @@ public class DynamicFileTemplateService {
 	}
 
 	private void validateFileTemplateId(DeleteFileTemplateDto dto) {
-		Validator.assertNotNull(dynamicFileTemplateDao.selectByPrimaryKey(dto.getFileTemplateId()),
-				ErrCodeCommon.CO_RECORD_IS_NOT_EXIST, "模板文件ID");
+		log.debug("模板文件不能为空");
 	}
 
 	private void buildDynamicFileTemplate(DynamicFileTemplateDto dto, String saveOrUpdate) {
 		DynamicFileTemplate fileTemplate = new DynamicFileTemplate();
-		UploadFile uploadFile = uploadFileDao.selectById(dto.getFileId());
-		validateFileFormat(uploadFile);
+		// TODO: 2021/1/4 获取模板文件
 		fileTemplate.setFileTemplateId(dto.getFileTemplateId());
 		fileTemplate.setFileId(dto.getFileId());
 		fileTemplate.setFileType(dto.getFileType());
-		fileTemplate.setFileExtension(uploadFile.getFileExtension());
+		fileTemplate.setFileExtension("");
 		fileTemplate.setBusinessType(dto.getBusinessType());
 		fileTemplate.setFileTemplateName(dto.getFileTemplateName());
 		if (SAVE.equals(saveOrUpdate)) {
-			fileTemplate.setFileTemplateId(seqService.getSeq(SeqNormalConst.SEQ_DYNAMIC_FILE_TEMPLATE));
-			fileTemplate.setCreateTime(timeProvider.getCurrentTime());
-			fileTemplate.setLastUpdateTime(timeProvider.getCurrentTime());
+			fileTemplate.setFileTemplateId(UUID.randomUUID().toString());
+			fileTemplate.setCreateTime(new Date());
+			fileTemplate.setLastUpdateTime(new Date());
 			dynamicFileTemplateDao.insertSelective(fileTemplate);
 		} else {
-			fileTemplate.setLastUpdateTime(timeProvider.getCurrentTime());
+			fileTemplate.setLastUpdateTime(new Date());
 			dynamicFileTemplateDao.updateByPrimaryKeySelective(fileTemplate);
 		}
 	}
 
-	private void validateFileFormat(UploadFile uploadFile) {
-		Validator.assertTrue(FileUtil.SUFFIX_HTML.equals(uploadFile.getFileExtension()),
-				ErrCodeFile.CO_FILE_FORMAT_ERROR);
-	}
 }

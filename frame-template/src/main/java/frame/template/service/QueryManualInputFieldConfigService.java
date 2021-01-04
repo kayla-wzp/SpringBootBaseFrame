@@ -1,10 +1,9 @@
 package frame.template.service;
 
-import asset.frame.util.PageUtil;
-import cffs.manage.query.dao.dynamictemplate.QueryManualInputFieldConfigDao;
-import cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldConfigListReq;
-import cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldConfigListRes;
-import cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldEnumListReq;
+import frame.template.dao.QueryManualInputFieldConfigDao;
+import frame.template.vo.reqres.QueryManualInputFieldConfigListReq;
+import frame.template.vo.reqres.QueryManualInputFieldConfigListRes;
+import frame.template.vo.reqres.QueryManualInputFieldEnumListReq;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,7 +16,6 @@ public class QueryManualInputFieldConfigService {
 
 	public List<QueryManualInputFieldConfigListRes> queryManualInputFieldConfigList(
 			QueryManualInputFieldConfigListReq req) {
-		PageUtil.setPaging(req.getCurrentPage(), req.getPageSize());
 		return queryManualInputFieldConfigDao.queryManualInputFieldConfigList(req);
 	}
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cffs.dao.dynamictemplate.ManualInputFieldEnumDao" >
-  <resultMap id="BaseResultMap" type="cffs.po.dynamictemplate.ManualInputFieldEnum" >
+<mapper namespace="frame.template.dao.ManualInputFieldEnumDao" >
+  <resultMap id="BaseResultMap" type="frame.template.vo.ManualInputFieldEnum" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="MANUAL_INPUT_FIELD_CONFIG_ID" property="manualInputFieldConfigId" jdbcType="VARCHAR" />
     <result column="ENUM_KEY" property="enumKey" jdbcType="VARCHAR" />
@@ -22,7 +22,7 @@
     delete from DT_MANUAL_INPUT_FIELD_ENUM
     where MANUAL_INPUT_FIELD_CONFIG_ID = #{manualInputFieldConfigId,jdbcType=VARCHAR}
   </delete>
-  <insert id="batchInsert" parameterType="cffs.po.dynamictemplate.ManualInputFieldEnum">
+  <insert id="batchInsert" parameterType="frame.template.vo.ManualInputFieldEnum">
     insert into DT_MANUAL_INPUT_FIELD_ENUM (ID, MANUAL_INPUT_FIELD_CONFIG_ID, ENUM_KEY,
     ENUM_VALUE, DISPLAY_ORDER)
     select a.*

@@ -1,30 +1,26 @@
 package frame.template.service;
 
-
-import asset.common.util.collection.CollectionUtil;
-import asset.common.validate.Validator;
-import cffs.core.constant.db.SeqTimeConst;
-import cffs.core.constant.dynamictemplate.ManualInputFieldTypeConst;
-import cffs.core.constant.errcode.ErrCodeTsign;
-import cffs.core.service.SeqService;
-import cffs.dao.dynamictemplate.ManualInputFieldConfigDao;
-import cffs.dao.dynamictemplate.ManualInputFieldEnumDao;
-import cffs.manage.dto.dynamictemplate.ManualInputFieldEnumDto;
-import cffs.po.dynamictemplate.ManualInputFieldConfig;
-import cffs.po.dynamictemplate.ManualInputFieldEnum;
+import frame.template.common.ManualInputFieldTypeConst;
+import frame.template.common.util.CollectionUtil;
+import frame.template.dao.ManualInputFieldConfigDao;
+import frame.template.dao.ManualInputFieldEnumDao;
+import frame.template.vo.dto.ManualInputFieldEnumDto;
+import frame.template.vo.ManualInputFieldConfig;
+import frame.template.vo.ManualInputFieldEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 @Service
+@Slf4j
 public class ManualInputFieldEnumService {
 	@Resource
 	private ManualInputFieldEnumDao manualInputFieldEnumDao;
 	@Resource
 	private ManualInputFieldConfigDao manualInputFieldConfigDao;
-	@Resource
-	private SeqService seqService;
 
 	public void addManualInputFieldEnum(ManualInputFieldEnumDto dto) {
 		validateManualInputFieldConfig(dto);
@@ -32,7 +28,7 @@ public class ManualInputFieldEnumService {
 		List<ManualInputFieldEnum> manualInputFieldEnumList = dto.getEnumList();
 		if (CollectionUtil.isNotEmpty(manualInputFieldEnumList)) {
 			manualInputFieldEnumList.forEach(manualInputFieldEnum -> {
-				manualInputFieldEnum.setId(seqService.getSeq(SeqTimeConst.SEQ_MANUAL_INPUT_FIELD_ENUM));
+				manualInputFieldEnum.setId(UUID.randomUUID().toString());
 				manualInputFieldEnum.setManualInputFieldConfigId(dto.getManualInputFieldConfigId());
 			});
 		}
@@ -42,9 +38,9 @@ public class ManualInputFieldEnumService {
 	private void validateManualInputFieldConfig(ManualInputFieldEnumDto dto) {
 		ManualInputFieldConfig manualInputFieldConfig =
 				manualInputFieldConfigDao.selectByPrimaryKey(dto.getManualInputFieldConfigId());
-		Validator.assertNotNull(manualInputFieldConfig, ErrCodeTsign.VALADATE_NOT_PASS, "该配置不存在");
+		log.debug("校验该配置是否存在");
 		if (!ManualInputFieldTypeConst.ENUM_SELECT.equals(manualInputFieldConfig.getFieldType())) {
-			Validator.assertFalse(true, ErrCodeTsign.VALADATE_NOT_PASS, "该配置不可以配置枚举");
+			log.debug("该配置不可以配置枚举");
 		}
 	}
 }

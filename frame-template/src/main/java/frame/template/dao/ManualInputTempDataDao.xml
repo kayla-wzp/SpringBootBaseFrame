@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cffs.dao.dynamictemplate.ManualInputTempDataDao" >
-  <resultMap id="BaseResultMap" type="cffs.po.dynamictemplate.ManualInputTempData" >
+<mapper namespace="frame.template.dao.ManualInputTempDataDao" >
+  <resultMap id="BaseResultMap" type="frame.template.vo.ManualInputTempData" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="BUSINESS_ID" property="businessId" jdbcType="VARCHAR" />
     <result column="TEMPLATE_PRIMARY_KEY" property="templatePrimaryKey" jdbcType="VARCHAR" />
@@ -24,7 +24,7 @@
     delete from DT_MANUAL_INPUT_TEMP_DATA
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cffs.po.dynamictemplate.ManualInputTempData" >
+  <insert id="insert" parameterType="frame.template.vo.ManualInputTempData" >
     insert into DT_MANUAL_INPUT_TEMP_DATA (ID, BUSINESS_ID,
       TEMPLATE_PRIMARY_KEY, SPLIT_DATA_ONE, SPLIT_DATA_TWO,
       SPLIT_DATA_THERE, SPLIT_DATA_FOUR)
@@ -32,7 +32,7 @@
       #{templatePrimaryKey,jdbcType=VARCHAR}, #{splitDataOne,jdbcType=VARCHAR}, #{splitDataTwo,jdbcType=VARCHAR},
       #{splitDataThere,jdbcType=VARCHAR}, #{splitDataFour,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cffs.po.dynamictemplate.ManualInputTempData" >
+  <insert id="insertSelective" parameterType="frame.template.vo.ManualInputTempData" >
     insert into DT_MANUAL_INPUT_TEMP_DATA
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -81,7 +81,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cffs.po.dynamictemplate.ManualInputTempData" >
+  <update id="updateByPrimaryKeySelective" parameterType="frame.template.vo.ManualInputTempData" >
     update DT_MANUAL_INPUT_TEMP_DATA
     <set >
       <if test="businessId != null" >
@@ -105,7 +105,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cffs.po.dynamictemplate.ManualInputTempData" >
+  <update id="updateByPrimaryKey" parameterType="frame.template.vo.ManualInputTempData" >
     update DT_MANUAL_INPUT_TEMP_DATA
     set BUSINESS_ID = #{businessId,jdbcType=VARCHAR},
       TEMPLATE_PRIMARY_KEY = #{templatePrimaryKey,jdbcType=VARCHAR},

@@ -11,8 +11,6 @@ public abstract class HtmlComponentFactory {
 	protected ManualInputFieldConfig manualInputFieldConfig;
 	protected String fieldVariableValue;
 	protected Map<String, Object> enterParamMap;
-
-
 	protected String fieldVariableName;
 	protected String querySql;
 	protected String fieldName;
@@ -31,9 +29,11 @@ public abstract class HtmlComponentFactory {
 		this.manualInputFieldConfigId = manualInputFieldConfig.getManualInputFieldConfigId();
 		this.fieldVariableValue = StringUtils.isNotBlank(fieldVariableValue) ? fieldVariableValue : "";
 	}
+
 	public static String getEcho(String value) {
 		return "<span class='blue'>" + value + "</span>";
 	}
+
 	public abstract Object getTemplateParamMapValue();
 
 	public abstract String getDiv();

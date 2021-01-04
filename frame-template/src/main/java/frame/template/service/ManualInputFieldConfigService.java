@@ -1,30 +1,27 @@
 package frame.template.service;
 
-import asset.common.util.collection.CollectionUtil;
-import asset.common.validate.Validator;
-import cffs.core.constant.db.SeqTimeConst;
-import cffs.core.constant.errcode.ErrCodeTsign;
-import cffs.core.service.SeqService;
-import cffs.dao.dynamictemplate.DynamicFileTemplateDao;
-import cffs.dao.dynamictemplate.ManualInputFieldConfigDao;
-import cffs.manage.dto.dynamictemplate.ManualInputFieldConfigDeleteDto;
-import cffs.manage.dto.dynamictemplate.ManualInputFieldConfigDto;
-import cffs.po.dynamictemplate.ManualInputFieldConfig;
+import frame.template.common.util.CollectionUtil;
+import frame.template.dao.DynamicFileTemplateDao;
+import frame.template.dao.ManualInputFieldConfigDao;
+import frame.template.vo.dto.ManualInputFieldConfigDeleteDto;
+import frame.template.vo.dto.ManualInputFieldConfigDto;
+import frame.template.vo.ManualInputFieldConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class ManualInputFieldConfigService {
 	@Resource
 	private ManualInputFieldConfigDao manualInputFieldConfigDao;
 	@Resource
 	private DynamicFileTemplateDao dynamicFileTemplateDao;
-	@Resource
-	private SeqService seqService;
 
 	public void addManualInputFieldConfig(ManualInputFieldConfigDto dto) {
 		validateParam(dto);
@@ -48,8 +45,9 @@ public class ManualInputFieldConfigService {
 	}
 
 	private void validateTemplateIsExist(ManualInputFieldConfigDto dto) {
-		Validator.assertNotNull(dynamicFileTemplateDao.selectByPrimaryKey(dto.getFileTemplateId()),
-				ErrCodeTsign.VALADATE_NOT_PASS, "该模板不存在");
+		if (dynamicFileTemplateDao.selectByPrimaryKey(dto.getFileTemplateId()) == null) {
+			log.debug("该模板不存在");
+		}
 	}
 
 	private void validateFieldVariableNameRepeat(ManualInputFieldConfigDto dto) {
@@ -63,16 +61,17 @@ public class ManualInputFieldConfigService {
 									dto.getManualInputFieldConfigId())
 
 					).collect(Collectors.toList());
-			Validator.assertTrue(CollectionUtil.isEmpty(sameFieldVariableNameConfigs), ErrCodeTsign.VALADATE_NOT_PASS,
-					"该配置参数已存在");
+			if (CollectionUtil.isNotEmpty(sameFieldVariableNameConfigs)) {
+				log.debug("该配置参数已存在");
+			}
 		}
 	}
 
 	private ManualInputFieldConfig buildManualInputFieldConfig(ManualInputFieldConfigDto dto) {
 		ManualInputFieldConfig manualInputFieldConfig = new ManualInputFieldConfig();
-		String manualInputFieldConfigId = StringUtils.isBlank(dto.getManualInputFieldConfigId())
-				? seqService.getSeq(SeqTimeConst.SEQ_MANUAL_INPUT_FIELD_CONFIG)
-				: dto.getManualInputFieldConfigId();
+		String manualInputFieldConfigId =
+				StringUtils.isBlank(dto.getManualInputFieldConfigId()) ? UUID.randomUUID().toString()
+						: dto.getManualInputFieldConfigId();
 		manualInputFieldConfig.setManualInputFieldConfigId(manualInputFieldConfigId);
 		manualInputFieldConfig.setFieldName(dto.getFieldName());
 		manualInputFieldConfig.setFieldVariableName(dto.getFieldVariableName());

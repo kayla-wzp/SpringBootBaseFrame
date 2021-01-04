@@ -1,6 +1,6 @@
 package frame.template.vo.dto;
 
-import cffs.core.dto.BaseDto;
+import frame.template.common.BaseDto;
 import lombok.Data;
 
 @Data

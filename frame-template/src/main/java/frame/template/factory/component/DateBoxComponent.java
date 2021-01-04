@@ -1,7 +1,7 @@
 package frame.template.factory.component;
 
 
-import cffs.po.dynamictemplate.ManualInputFieldConfig;
+import frame.template.vo.ManualInputFieldConfig;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
@@ -21,7 +21,7 @@ public class DateBoxComponent extends HtmlComponentFactory {
 
 	@Override
 	public String getDiv() {
-		return "<div class='form-group'><label>" + fieldName + "��</label> <div class='input-group date' id='"
+		return "<div class='form-group'><label>" + fieldName + "：</label> <div class='input-group date' id='"
 				+ fieldVariableName + extendName + "'><span class='input-group-addon'>"
 				+ "        <span class='glyphicon glyphicon-calendar'></span></span>" + "   <input type='text' value='"
 				+ fieldVariableValue + "' class='form-control' name='" + fieldVariableName + "' id='"
@@ -40,8 +40,8 @@ public class DateBoxComponent extends HtmlComponentFactory {
 
 	@Override
 	public String getFillComponentsJsValidator() {
-		return fieldVariableName + ": {trigger: 'change',validators: { notEmpty: {message: '��ѡ������' },"
-				+ "date: {format: 'YYYY-MM-DD',message: '��ѡ����ȷ������'}}}";
+		return fieldVariableName + ": {trigger: 'change',validators: { notEmpty: {message: '请选择日期' },"
+				+ "date: {format: 'YYYY-MM-DD',message: '请选择正确的日期'}}}";
 	}
 
 }
