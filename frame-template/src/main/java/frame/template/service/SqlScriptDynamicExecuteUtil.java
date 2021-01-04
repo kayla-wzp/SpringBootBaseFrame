@@ -23,7 +23,7 @@ public class SqlScriptDynamicExecuteUtil {
 	 * @return
 	 */
 	public static List<?> selectList(String executeSql, SqlSession sqlSession, Class<?> clazz, Object param) {
-		String msId = "cffs.core.service.dynamictemplate.DynamicSqlService";
+		String msId = "frame.template.service.DynamicSqlService";
 		initSqlSession(executeSql, sqlSession, clazz, msId);
 		List<?> list = sqlSession.selectList(msId, param);
 		return list;
@@ -37,7 +37,7 @@ public class SqlScriptDynamicExecuteUtil {
 	 * @return
 	 */
 	public static Object selectOne(String executeSql, SqlSession sqlSession,Class<?> clazz,  Object param) {
-		String msId = "cffs.core.service.dynamictemplate.DynamicSqlService";
+		String msId = "frame.template.service.DynamicSqlService";
 		initSqlSession(executeSql, sqlSession, clazz, msId);
 		return sqlSession.selectOne(msId, param);
 	}

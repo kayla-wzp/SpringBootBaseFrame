@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="GBK" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cffs.manage.query.dao.dynamictemplate.QueryDynamicFileTemplateDao">
+<mapper namespace="frame.template.dao.QueryDynamicFileTemplateDao">
 
     <select id="QueryDynamicFileTemplateList"
-            resultType="cffs.manage.query.vo.dynamictemplate.QueryDynamicFileTemplateRes">
+            resultType="frame.template.vo.reqres.QueryDynamicFileTemplateRes">
         select
         DFT.FILE_TEMPLATE_ID as fileTemplateId,
         DFT.FILE_ID as fileId,

@@ -1,3 +1,76 @@
+--上传文件信息表
+create table RS_UPLOAD_FILE
+(
+    FILE_ID            VARCHAR2(20 char)  not null
+        constraint PK_RS_UPLOAD_FILE
+        primary key,
+    FILE_SOURCE        VARCHAR2(1 char)   not null,
+    FILE_UPLOADER_ID   VARCHAR2(20 char)  not null,
+    FILE_ORIGINAL_NAME VARCHAR2(100 char) not null,
+    FILE_SAVE_NAME     VARCHAR2(100 char) not null,
+    FILE_EXTENSION     VARCHAR2(5 char)   not null,
+    FILE_PATH          VARCHAR2(200 char) not null,
+    CREATE_TIME        TIMESTAMP(6)       not null
+)
+    /
+
+comment on table RS_UPLOAD_FILE is '文件信息表，上传文件都需要走这个表'
+/
+
+comment on column RS_UPLOAD_FILE.FILE_ID is '主键'
+/
+
+comment on column RS_UPLOAD_FILE.FILE_SOURCE is '文件来源：0：online上传 1：mamage后台上传'
+/
+
+comment on column RS_UPLOAD_FILE.FILE_UPLOADER_ID is '上传人ID：online上传为ACCOUNT_ID
+/manage上传为OPERATOR_ID'
+/
+
+comment on column RS_UPLOAD_FILE.FILE_ORIGINAL_NAME is '原始附件名称，如发票信息'
+/
+
+comment on column RS_UPLOAD_FILE.FILE_SAVE_NAME is '存储附件名称，如发票信息'
+/
+
+comment on column RS_UPLOAD_FILE.FILE_EXTENSION is '文件格式，如jpg'
+/
+
+comment on column RS_UPLOAD_FILE.FILE_PATH is '文件路径，如/app/file'
+/
+
+comment on column RS_UPLOAD_FILE.CREATE_TIME is '创建时间'
+/
+
+
+--文件类型表
+create table RS_FILE_TYPE
+(
+    FILE_TYPE      VARCHAR2(4 char)   not null
+        constraint PK_CO_FILE_TYPE
+        primary key,
+    FILE_TYPE_NAME VARCHAR2(100 char) not null,
+    DISPLAY_ORDER  NUMBER(2),
+    FILE_PURPOSE   VARCHAR2(2)
+)
+    /
+
+comment on table RS_FILE_TYPE is '文件类型'
+/
+
+comment on column RS_FILE_TYPE.FILE_TYPE is '文件类型'
+/
+
+comment on column RS_FILE_TYPE.FILE_TYPE_NAME is '文件类型名称'
+/
+
+comment on column RS_FILE_TYPE.DISPLAY_ORDER is '前端展示排序'
+/
+
+comment on column RS_FILE_TYPE.FILE_PURPOSE is '文件用途'
+/
+
+
 -- 手动输入表单保存数据
 create table DT_MANUAL_INPUT_TEMP_DATA
 (

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="GBK" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cffs.manage.query.dao.dynamictemplate.QueryManualInputFieldEnumDao">
+<mapper namespace="frame.template.dao.QueryManualInputFieldEnumDao">
 
 
     <select id="queryManualInputFieldEnumList"
-            resultType="cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldEnumListRes"
+            resultType="frame.template.vo.reqres.QueryManualInputFieldEnumListRes"
             parameterType="string">
 			select MANUAL_INPUT_FIELD_CONFIG_ID as manualInputFieldConfigId,
 			       ENUM_KEY                     as enumKey,

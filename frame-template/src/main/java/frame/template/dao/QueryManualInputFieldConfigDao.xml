@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="GBK" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cffs.manage.query.dao.dynamictemplate.QueryManualInputFieldConfigDao">
+<mapper namespace="frame.template.dao.QueryManualInputFieldConfigDao">
 
 
 	<select id="queryManualInputFieldConfigList"
-			resultType="cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldConfigListRes"
-			parameterType="cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldConfigListReq">
+			resultType="frame.template.vo.reqres.QueryManualInputFieldConfigListRes"
+			parameterType="frame.template.vo.reqres.QueryManualInputFieldConfigListReq">
 		select MANUAL_INPUT_FIELD_CONFIG_ID   as manualInputFieldConfigId,
 		       FIELD_NAME                     as fieldName,
 		       FIELD_VARIABLE_NAME            as fieldVariableName,
@@ -34,7 +34,7 @@
 		</if>
 	</select>
 	<select id="querySingleManualInputFieldConfig"
-			resultType="cffs.manage.query.vo.dynamictemplate.QueryManualInputFieldConfigListRes"
+			resultType="frame.template.vo.reqres.QueryManualInputFieldConfigListRes"
 			parameterType="string">
 		select MANUAL_INPUT_FIELD_CONFIG_ID   as manualInputFieldConfigId,
 		FIELD_NAME                     as fieldName,
